@@ -1,0 +1,218 @@
+<xsd:schema xmlns="http://www.ics.uci.edu/~jgeorgas/schemas/interfacedef.xsd" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns:archinstance="http://www.ics.uci.edu/pub/arch/xArch/instance.xsd"
+	xmlns:archimpl="http://www.ics.uci.edu/pub/arch/xArch/implementation.xsd"
+	targetNamespace="http://www.ics.uci.edu/~jgeorgas/schemas/interfacedef.xsd" 
+	elementFormDefault="qualified" attributeFormDefault="qualified">            
+	
+	<!-- Import namespaces -->
+	<xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/instance.xsd" schemaLocation="http://www.isr.uci.edu/projects/xarchuci/core/instance.xsd"/>
+	<xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/implementation.xsd" schemaLocation="http://www.isr.uci.edu/projects/xarchuci/ext/implementation.xsd"/>
+	
+	<!-- Documentation -->
+	<xsd:annotation>
+		<xsd:documentation>
+      	xArch Interface Definition XML Schema 1.0
+      
+      	This schema is intended to capture the specification of a component interface.
+      	Special support is provided for event-based systems, in which interfaces are 
+      	defined in terms of the events that are received and emitted by 
+      	components in their interactions within an event-based system. Special support 
+      	is also provided for the C2 architectural style in terms of supporting the different
+      	classes of messages found in that style.
+  
+      	TODO:
+      		-- No implementation of event instances. Should have instances that are
+      		   linked to their type, but contain actual values for the event's parameters.
+      		-- Really sub-par implementation of event types. That needs to be 
+      		   extended and fleshed out to capture the notion of events as 
+      		   data carriers: each event should have a list of parameters and types
+      		   for those parameters. Strings for each should be fine for now.
+      		-- Currently, a whole interface specification is attached to a
+      		   component. Should interfaces be better attached to interface
+      		   definitions in xADL? Where should the link be?
+      	
+      	Change Log:
+      		11/4/2011: John Georgas [john.georgas@nau.edu]:
+      			Schema resurrection. Makino additions.
+      		4/3/2006: John Georgas [jgeorgas@ics.uci.edu]:
+      			Initial schema development and validation.
+    	</xsd:documentation>
+    </xsd:annotation>
+
+	<!-- 
+	TYPE: VariantComponentTypeImplIntSpec
+	
+	The VariantComponentTypeImplIntSpec type extends the VariantComponentTypeImpl type
+	to support the ability to add the specification of an interface description.
+	to.
+	-->
+	<xsd:complexType name="VariantComponentTypeImplIntSpec">
+		<xsd:complexContent>
+			<xsd:extension base="archimpl:VariantComponentTypeImpl">
+				<xsd:sequence>
+					<xsd:element name="interfaceSpecification" type="InterfaceSpecification"
+						minOccurs="1" maxOccurs="1"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<!-- 
+	TYPE: InterfaceSpecification
+	
+	Given the various kinds of component interfaces, this is an abstract type which
+	can be extended to support different kinds of interfaces, such as event-based or
+	C2-style interfaces.
+	-->
+	<xsd:complexType name="InterfaceSpecification" abstract="true"/>
+	
+	<!--
+	TYPE: EventBasedInterfaceSpecification
+	
+	This type defines an event-based interface specification, extending the
+	abstract InterfaceSpecification type. This event-based interface defines
+	the set of messages or events that are consumed and/or emitted by the
+	component.
+	-->
+	<xsd:complexType name="EventBasedInterfaceSpecification">
+		<xsd:complexContent>
+			<xsd:extension base="InterfaceSpecification">
+				<xsd:sequence>
+					<xsd:element name="eventsConsumed" type="EventList"
+						minOccurs="0" maxOccurs="1"/>
+					<xsd:element name="eventsProduced" type="EventList"
+						minOccurs="0" maxOccurs="1"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<!--
+	TYPE: C2InterfaceSpecification
+	
+	This type supports the definition of interfaces for components
+	which conform to the C2 architectural style. In the C2 style, 
+	each component emits notifications (informing other components
+	of specific situations) and requests (requesting other 
+	components to perform a task). Each component also responds to a
+	specific set of notifications and requests.
+	-->
+	<xsd:complexType name="C2InterfaceSpecification">
+		<xsd:complexContent>
+			<xsd:extension base="InterfaceSpecification">
+				<xsd:sequence>
+					<xsd:element name="notificationsProduced" type="EventList"
+						minOccurs="0" maxOccurs="1"/>
+					<xsd:element name="notificationsConsumed" type="EventList"
+						minOccurs="0" maxOccurs="1"/>
+					<xsd:element name="requestsProduced" type="EventList"
+						minOccurs="0" maxOccurs="1"/>
+					<xsd:element name="requestsConsumed" type="EventList"
+						minOccurs="0" maxOccurs="1"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<!--
+	TYPE: EventList
+	
+	An EventList is an unordered list of events that groups events in
+	logical groups.
+	-->
+	<xsd:complexType name="EventList">
+		<xsd:sequence>
+			<xsd:element name="event" type="Event"
+				minOccurs="1" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!--
+	TYPE: Event
+	
+	Another abstract type that provides flexibility for defining custom
+	event types in order to accommodate specific systems and information.
+	This type should be extended through the definition of custom events.
+	-->
+	<xsd:complexType name="Event" abstract="true"/>
+	
+	<!--
+	TYPE: SimpleEvent
+	
+	A very simple extension of the Event type with the capability to define
+	an event that has an identifier, description, and specified type.
+	-->
+	<xsd:complexType name="SimpleEvent">
+		<xsd:complexContent>
+			<xsd:extension base="Event">
+				<xsd:sequence>
+					<xsd:element name="eventType" type="archinstance:XMLLink"
+    						minOccurs="1" maxOccurs="1"/>
+				</xsd:sequence>
+				<xsd:attribute name="id" type="archinstance:Identifier"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<!--
+	TYPE: EventType
+	
+	Another abstract type which provides the extensibility needed to define
+	custom event types.
+	-->
+	<xsd:complexType name="EventType" abstract="true"/>
+	
+	<!--
+	TYPE: SimpleEventType
+	
+	A simple event type consisting of a specified message type.
+	-->
+	<xsd:complexType name="SimpleEventType">
+		<xsd:complexContent>
+			<xsd:extension base="EventType">
+				<xsd:sequence>
+					<xsd:element name="eventArgument" type="EventArgument"
+						minOccurs="1" maxOccurs="unbounded"/>
+					<xsd:element name="description" type="archinstance:Description"
+						minOccurs="0" maxOccurs="1"/>
+				</xsd:sequence>
+		    	<xsd:attribute name="id" type="archinstance:Identifier"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<!-- 
+	TYPE: EventArgument
+	
+	An abstract extension point for event arguments.
+	-->
+	<xsd:complexType name="EventArgument" abstract="true"/>
+	
+	<!--
+	TYPE: StringEventArgument
+	
+	A simple string description of an event argument.
+	-->
+	<xsd:complexType name="StringEventArgument">
+		<xsd:complexContent>
+			<xsd:extension base="EventArgument">
+				<xsd:sequence>
+					<xsd:element name="argument" type="StringArgument"
+						minOccurs="1" maxOccurs="1"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<!-- 
+	TYPE: StringArgument
+	
+	A simple string for arguments.
+	-->
+	<xsd:complexType name="StringArgument">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+</xsd:schema>

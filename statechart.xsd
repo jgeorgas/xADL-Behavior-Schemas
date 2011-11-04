@@ -1,0 +1,303 @@
+<xsd:schema xmlns="http://www.ics.uci.edu/~jgeorgas/schemas/statechart.xsd" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns:archinstance="http://www.ics.uci.edu/pub/arch/xArch/instance.xsd"
+	xmlns:archimpl="http://www.ics.uci.edu/pub/arch/xArch/implementation.xsd"
+	xmlns:interfacedef="http://www.ics.uci.edu/~jgeorgas/schemas/interfacedef.xsd"
+	xmlns:options="http://www.ics.uci.edu/pub/arch/xArch/options.xsd"
+	targetNamespace="http://www.ics.uci.edu/~jgeorgas/schemas/statechart.xsd" 
+	elementFormDefault="qualified" attributeFormDefault="qualified">            
+	
+	<!-- Import namespaces -->
+	<xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/instance.xsd" 
+	schemaLocation="http://www.isr.uci.edu/projects/xarchuci/core/instance.xsd"/>
+	<xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/implementation.xsd" 
+	schemaLocation="http://www.isr.uci.edu/projects/xarchuci/ext/implementation.xsd"/>
+	<xsd:import namespace="http://www.ics.uci.edu/~jgeorgas/schemas/interfacedef.xsd" 
+	schemaLocation="http://www.ics.uci.edu/~jgeorgas/schemas/interfacedef.xsd"/>
+	<xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/options.xsd"
+	schemaLocation="http://www.isr.uci.edu/projects/xarchuci/ext/options.xsd"/>
+	
+	<!-- Documentation -->
+	<xsd:annotation>
+		<xsd:documentation>
+      	xArch Statechart Definition XML Schema 1.0
+      
+      	This schema supports the specification of behavioral statecharts
+      	in order to model component behavior in terms of component interactions
+      	with other system components.
+      	
+      	TODO:
+      		-- Currently, initalState and finalState are links to actual states,
+      		   rather than the pseudostate approach that statecharts adopt. Consider
+      		   fixing.
+      		-- Look at adding statecharts to other component types in xADL, by
+      		   creating new types of components that have statechart links.
+  
+      	Change Log:
+      		11/4/2011: John Georgas [john.georgas@nau.edu]:
+      			Resurrected schema; integrated Makino XSD.
+      	    5/10/2007: John Georgas [jgeorgas@ics.uci.edu]:
+      	        Cleanup, fixes, and additions.
+      		4/4/2006: John Georgas [jgeorgas@ics.uci.edu]:
+      			Adaptation of statechart schema provided by Scott A. 
+      			Hendrickson [shendric@uci.edu].
+      		?/?/????: Scott A. Hendrickson [shendric@uci.edu]:
+      			Initial development.
+    	</xsd:documentation>
+    </xsd:annotation>
+    
+    <!-- 
+    ELEMENT: StatechartTypes
+    
+    An element for types of elements associated with statecharts. Mostly intended
+    to capture event types.
+    -->
+    <xsd:element name="statechartTypes" type="StatechartTypes"/>
+    
+    <!--
+    TYPE: StatechartTypes
+    
+    A type container. Currently holds EventType things.
+    -->
+    <xsd:complexType name="StatechartTypes">
+    		<xsd:sequence>
+    			<xsd:element name="eventType" type="interfacedef:EventType"
+    			minOccurs="0" maxOccurs="unbounded"/>
+    		</xsd:sequence>
+    </xsd:complexType>
+    
+    <!--
+    TYPE: VariantComponentTypeImplStatechart
+    
+    This type extends the VariantComponentTypeImpl to support the ability 
+    to add a statechart specification to a component model.
+    
+    -->
+    <xsd:complexType name="VariantComponentTypeImplStatechart">
+	    	<xsd:complexContent>
+	    		<xsd:extension base="archimpl:VariantComponentTypeImpl">
+	    			<xsd:sequence>
+	    				<xsd:element name="statechart" type="Statechart"
+	    				minOccurs="0" maxOccurs="1"/>
+	    			</xsd:sequence>
+	    		</xsd:extension>
+	    	</xsd:complexContent>
+    </xsd:complexType>
+    
+    <!--
+    TYPE: Statechart
+    
+    This is the basic definition of a statechart, essentially consisting 
+    of a collection of states and transitions between these states.
+    -->
+    <xsd:complexType name="Statechart">
+	    	<xsd:sequence>
+	    		<xsd:element name="state" type="State"
+	    			minOccurs="0" maxOccurs="unbounded"/>
+	    		<xsd:element name="transition" type="Transition"
+	    			minOccurs="0" maxOccurs="unbounded"/>
+	    		<xsd:element name="description" type="archinstance:Description"
+	    			minOccurs="0" maxOccurs="1"/>
+	    		<xsd:element name="initialState" type="archinstance:XMLLink"
+	    			minOccurs="1" maxOccurs="1"/>
+	    		<xsd:element name="finalState" type="archinstance:XMLLink"
+	    			minOccurs="1" maxOccurs="1"/>
+		   	<!-- @@JG: Not completely sure about the cardinality of history states -->
+	    		<xsd:element name="historyState" type="HistoryState"
+	    			minOccurs="0" maxOccurs="1"/>
+	    	</xsd:sequence>
+    	<xsd:attribute name="id" type="archinstance:Identifier"/>
+    </xsd:complexType>
+    
+    <!--
+    TYPE: State
+    
+    Provided for extensibility, this is a basic abstract type from
+    which more complex state types may be derived.
+    -->
+    <xsd:complexType name="State" abstract="true"/>
+    
+    <!--
+    TYPE: SimpleState
+    
+    This type defines a simple state with an identifier and a
+    textual description.
+    -->
+    <xsd:complexType name="SimpleState">
+	    	<xsd:complexContent>
+	    		<xsd:extension base="State">
+	    			<xsd:sequence>
+	    				<xsd:element name="description" type="archinstance:Description"
+	    				minOccurs="0" maxOccurs="1"/>
+	    			</xsd:sequence>
+	    			<xsd:attribute name="id" type="archinstance:Identifier"/>
+	    		</xsd:extension>
+	    	</xsd:complexContent>
+    </xsd:complexType>
+    
+    <!--
+    TYPE: ConcurrentState
+    
+    An extension of the SimpleState type, this type provides support
+    for defining concurrent statechart specifications. Statechart 
+    specifications used in this type are intended to be concurrently operating.
+    -->
+    <xsd:complexType name="ConcurrentState">
+	    	<xsd:complexContent>
+	    		<xsd:extension base="State">
+	    			<xsd:sequence>
+	    				<xsd:element name="concurrentStatechart" type="Statechart"
+	    					minOccurs="1" maxOccurs="unbounded"/>
+	    			</xsd:sequence>
+	    		</xsd:extension>
+	    	</xsd:complexContent>
+    </xsd:complexType>
+    
+    <!--
+    TYPE: HistoryState
+    
+    An extension of the SimpleState type providing support for 
+    defining a history state, just to be complete in terms of
+    statechart specifications.
+    -->
+    <xsd:complexType name="HistoryState">
+	    	<xsd:complexContent>
+	    		<xsd:extension base="SimpleState">
+	    			<xsd:sequence>
+	    				<xsd:element name="savedState" type="archinstance:XMLLink"
+	    					minOccurs="1" maxOccurs="1"/>
+	    				<xsd:element name="onNullSaved" type="archinstance:XMLLink"
+	    					minOccurs="1" maxOccurs="1"/>
+	    			</xsd:sequence>
+	    		</xsd:extension>
+	    	</xsd:complexContent>
+    </xsd:complexType>
+    
+    <!--
+    TYPE: SuperState
+    
+    This type extends the SimpleState type to allow for the definition
+    of superstates.
+    -->
+    <xsd:complexType name="SuperState">
+	    	<xsd:complexContent>
+	    		<xsd:extension base="SimpleState">
+	    			<xsd:sequence>
+	    				<xsd:element name="nestedStatechart" type="Statechart"
+	    				minOccurs="1" maxOccurs="1"/>
+	    			</xsd:sequence>
+	    		</xsd:extension>
+	    	</xsd:complexContent>
+    </xsd:complexType>
+    
+    <!--
+    TYPE: ActivityState
+    
+    This extension of the SimpleState type specifies a state which 
+    contains activities internally (similar to self-transitions) 
+    as well as entry and exit activities.
+    -->
+    <xsd:complexType name="ActivityState">
+	    	<xsd:complexContent>
+	    		<xsd:extension base="SimpleState">
+	    			<xsd:sequence>
+	    				<xsd:element name="entryActivity" type="Activity"
+	    					minOccurs="0" maxOccurs="1"/>
+	    				<xsd:element name="exitActivity" type="Activity"
+	    					minOccurs="0" maxOccurs="1"/>
+	    				<xsd:element name="internalActivity" type="Activity"
+	    					minOccurs="0" maxOccurs="unbounded"/>
+	    				<!-- Not quite sure about the max bounding of do-activities -->
+	    				<xsd:element name="doActivity" type="Activity"
+	    					minOccurs="0" maxOccurs="1"/>
+	    			</xsd:sequence>
+	    		</xsd:extension>
+	    	</xsd:complexContent>
+    </xsd:complexType>
+    
+    <!--
+    TYPE: Transition
+    
+    This type captures a transition between states:
+    in essence, a directed edge linking a "from" state with
+    a "to" state along with optional specifications of a trigger,
+    a guard, and an activity.
+    -->
+    <xsd:complexType name="Transition">
+	    	<xsd:sequence>
+	    		<xsd:element name="from" type="archinstance:XMLLink"
+	    			minOccurs="1" maxOccurs="1"/>
+	    		<xsd:element name="to" type="archinstance:XMLLink"
+	    			minOccurs="1" maxOccurs="1"/>
+	    		<xsd:element name="trigger" type="Trigger"
+	    			minOccurs="0" maxOccurs="1"/>
+	    		<!-- Link to the options schema for guard definitions -->
+	    		<xsd:element name="guard" type="options:Guard"
+	    			minOccurs="0" maxOccurs="1"/>
+	    		<xsd:element name="activity" type="Activity"
+	    			minOccurs="0" maxOccurs="1"/>
+	    	</xsd:sequence>
+    </xsd:complexType>
+    
+    <!-- 
+    TYPE: Trigger
+    
+    This abstract type provides for the definition of a 
+    trigger that initiates a transition between states.
+    -->
+    <xsd:complexType name="Trigger" abstract="true"/>
+    
+    <!-- 
+    TYPE: EventTrigger
+    
+    This type supports the definition of a trigger based
+    on an event received from another component.
+    -->
+    <xsd:complexType name="EventTrigger">
+	    	<xsd:complexContent>
+	    		<xsd:extension base="Trigger">
+	    			<xsd:sequence>
+	    				<xsd:element name="event" type="interfacedef:Event"
+	    					minOccurs="1" maxOccurs="unbounded"/>
+	    			</xsd:sequence>
+	    		</xsd:extension>
+	    	</xsd:complexContent>
+    </xsd:complexType>
+    
+    <!-- 
+    TYPE: Activity
+    
+    Another abstract type to support the specification of 
+    different kinds of activity.    
+    -->
+    <xsd:complexType name="Activity" abstract="true"/>
+    
+    <!--
+    TYPE: EventActivity
+    
+    A type to define an activity which emits an event.
+    -->
+    <xsd:complexType name="EventActivity">
+	    	<xsd:complexContent>
+	    		<xsd:extension base="Activity">
+	    			<xsd:sequence>
+	    				<xsd:element name="event" type="interfacedef:Event"
+	    					minOccurs="1" maxOccurs="unbounded"/>
+	    			</xsd:sequence>
+	    		</xsd:extension>
+	    	</xsd:complexContent>
+    </xsd:complexType>
+    
+    <!--
+    TYPE: SimpleActivity
+    
+    An extension of the abstract Activity type to support the specification 
+    of simple activities, defined by a string describing their content. Less
+    useful for behavioral modeling.
+    -->
+    <xsd:complexType name="SimpleActivity">
+	    	<xsd:simpleContent>
+	    		<xsd:extension base="xsd:string"/>
+	    	</xsd:simpleContent>
+    </xsd:complexType>
+</xsd:schema>
