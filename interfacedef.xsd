@@ -114,7 +114,104 @@
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
-	
+	****************************************
+
+	<!--
+         TYPE: Object
+
+	An abstract type that provides flexibility for defining custom
+	object types in order to accommodate specific systems and information.
+	This type should be extended through the definition of custom events.
+
+	-->
+	<xsd:complexType name="Object" abstract="true"/>
+
+
+	<!--
+	TYPE: ObjectList
+
+	An ObjecttList is an unordered list of objects that groups objects in
+	logical groups.
+
+	-->
+
+	<xsd:complexType name="ObjectList">
+		<xsd:sequence>
+			<xsd:element name="object" type="Object"
+				minOccurs="1" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<!--
+	TYPE: SimpleObject
+
+	A very simple extension of the Object type with the capability to define
+	an object that has an identifier, description, and specified type.
+
+	-->
+
+	<xsd:complexType name="SimpleObject">
+		<xsd:complexContent>
+			<xsd:extension base="Object">
+				<xsd:sequence>
+					<xsd:element name="objectType" type="archinstance:XMLLink"
+   						minOccurs="1" maxOccurs="1"/>
+				</xsd:sequence>
+				<xsd:attribute name="id" type="archinstance:Identifier"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<!--
+	TYPE: Instance	
+
+	Yet another abstract type that provides flexibility for defining custom
+	event types in order to accommodate specific systems and information.
+	This type should be extended through the definition of custom events.
+
+	-->
+
+	<xsd:complexType name="Instance" abstract="true"/>
+
+	<!--
+	TYPE: InstanceList	
+
+	An InstanceList is an unordered list of instances that groups instances in
+	logical groups.
+
+	-->
+
+	<xsd:complexType name="InstanceList">
+		<xsd:sequence>
+			<xsd:element name="instance" type="Instance"
+				minOccurs="1" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+        <!--
+	TYPE: SimpleInstance
+
+	A very simple extension of the Instance type with the capability to define
+	an instance that has an identifier, description, and specified type.
+
+	-->
+
+	<xsd:complexType name="SimpleInstance">
+		<xsd:complexContent>
+			<xsd:extension base="Instance">
+				<xsd:sequence>
+					<xsd:element name="instanceType" type="archinstance:XMLLink"
+    						minOccurs="1" maxOccurs="1"/>
+				</xsd:sequence>
+
+				<xsd:attribute name="id" type="archinstance:Identifier"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+****************************************
 	<!--
 	TYPE: EventList
 	
@@ -155,13 +252,104 @@
 		</xsd:complexContent>
 	</xsd:complexType>
 	
+*******************************************	
+
 	<!--
-	TYPE: EventType
-	
+         TYPE: EventType
+
 	Another abstract type which provides the extensibility needed to define
 	custom event types.
-	-->
+   	-->
+
 	<xsd:complexType name="EventType" abstract="true"/>
+	    <xsd:complexContent>
+	        <xsd:estension base="Event">
+	            <xsd:sequence>
+	                <xsd:element name="eventString" type="string"
+	                    minOccurs="1" maxOccurs="1"/>
+	            </xsd:sequence>
+	            <xsd:attribute name="id" type"archinstance:Identifier"/>
+	        </xsd:extension>
+	    </xsd:complexContent>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="EventType" abstract="true"/>
+	    <xsd:complexContent>
+	        <xsd:estension base="Event">
+	            <xsd:sequence>
+	                <xsd:element name="eventInt" type="integer"
+	                    minOccurs="1" maxOccurs="1"/>
+	            </xsd:sequence>
+	            <xsd:attribute name="id" type"archinstance:Identifier"/>
+	        </xsd:extension>
+	    </xsd:complexContent>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="EventType" abstract="true"/>
+	    <xsd:complexContent>
+	        <xsd:estension base="Event">
+	            <xsd:sequence>
+	                <xsd:element name="eventDouble" type="double"
+	                    minOccurs="1" maxOccurs="1"/>
+	            </xsd:sequence>
+	            <xsd:attribute name="id" type"archinstance:Identifier"/>
+	        </xsd:extension>
+	    </xsd:complexContent>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="EventType" abstract="true"/>
+	    <xsd:complexContent>
+	        <xsd:estension base="Event">
+	            <xsd:sequence>
+	                <xsd:element name="eventObject" type="object"
+	                    minOccurs="1" maxOccurs="1"/>
+	            </xsd:sequence>
+	            <xsd:attribute name="id" type"archinstance:Identifier"/>
+	        </xsd:estension>
+	    </xsd:complexContent>
+	</xsd:complexType>
+
+	<!--
+	TYPE: SimpleEventObject
+
+	A simple event object.
+	-->
+
+	<xsd:complexType name="SimpleEventObject" abstract="true"/>
+	    <xsd:complexContent>
+	        <xsd:estension base="Object">
+	            <xsd:sequence>
+	                <xsd:element name="SimpleEventObject" type="object"
+	                    minOccurs="1" maxOccurs="1"/>
+	            </xsd:sequence>
+	            <xsd:attribute name="id" type"archinstance:Identifier"/>
+	        </xsd:extension>
+	    </xsd:complexContent>
+	</xsd:complexType>
+
+         <!--
+	TYPE: SimpleEventInstance
+	A simple event instance.
+	-->
+
+	<xsd:complexType name="SimpleEventInstance" abstract="true"/>
+	    <xsd:complexContent>
+	        <xsd:estension base="Instance">
+	            <xsd:sequence>
+	                <xsd:element name="SimpleEventInstance" type="instance"
+	                    minOccurs="1" maxOccurs="1"/>
+	            </xsd:sequence>
+	            <xsd:attribute name="id" type"archinstance:Identifier"/>
+	        </xsd:extension>
+	    </xsd:complexContent>
+	</xsd:complexType>
+
+	
+
+************************************************
 	
 	<!--
 	TYPE: SimpleEventType
