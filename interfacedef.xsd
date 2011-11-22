@@ -268,7 +268,7 @@
 	                <xsd:element name="eventString" type="string"
 	                    minOccurs="1" maxOccurs="1"/>
 	            </xsd:sequence>
-	            <xsd:attribute name="id" type"archinstance:Identifier"/>
+	            <xsd:attribute name="id" type="archinstance:Identifier"/>
 	        </xsd:extension>
 	    </xsd:complexContent>
 	</xsd:complexType>
@@ -281,7 +281,7 @@
 	                <xsd:element name="eventInt" type="integer"
 	                    minOccurs="1" maxOccurs="1"/>
 	            </xsd:sequence>
-	            <xsd:attribute name="id" type"archinstance:Identifier"/>
+	            <xsd:attribute name="id" type="archinstance:Identifier"/>
 	        </xsd:extension>
 	    </xsd:complexContent>
 	</xsd:complexType>
@@ -294,7 +294,7 @@
 	                <xsd:element name="eventDouble" type="double"
 	                    minOccurs="1" maxOccurs="1"/>
 	            </xsd:sequence>
-	            <xsd:attribute name="id" type"archinstance:Identifier"/>
+	            <xsd:attribute name="id" type="archinstance:Identifier"/>
 	        </xsd:extension>
 	    </xsd:complexContent>
 	</xsd:complexType>
@@ -307,7 +307,7 @@
 	                <xsd:element name="eventObject" type="object"
 	                    minOccurs="1" maxOccurs="1"/>
 	            </xsd:sequence>
-	            <xsd:attribute name="id" type"archinstance:Identifier"/>
+	            <xsd:attribute name="id" type="archinstance:Identifier"/>
 	        </xsd:estension>
 	    </xsd:complexContent>
 	</xsd:complexType>
@@ -325,7 +325,7 @@
 	                <xsd:element name="SimpleEventObject" type="object"
 	                    minOccurs="1" maxOccurs="1"/>
 	            </xsd:sequence>
-	            <xsd:attribute name="id" type"archinstance:Identifier"/>
+	            <xsd:attribute name="id" type="archinstance:Identifier"/>
 	        </xsd:extension>
 	    </xsd:complexContent>
 	</xsd:complexType>
@@ -342,7 +342,7 @@
 	                <xsd:element name="SimpleEventInstance" type="instance"
 	                    minOccurs="1" maxOccurs="1"/>
 	            </xsd:sequence>
-	            <xsd:attribute name="id" type"archinstance:Identifier"/>
+	            <xsd:attribute name="id" type="archinstance:Identifier"/>
 	        </xsd:extension>
 	    </xsd:complexContent>
 	</xsd:complexType>
