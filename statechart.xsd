@@ -1,3 +1,4 @@
+<!--
 <xsd:schema xmlns="http://www.ics.uci.edu/~jgeorgas/schemas/statechart.xsd" 
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
 	xmlns:archinstance="http://www.ics.uci.edu/pub/arch/xArch/instance.xsd"
@@ -16,7 +17,29 @@
 	schemaLocation="http://www.ics.uci.edu/~jgeorgas/schemas/interfacedef.xsd"/>
 	<xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/options.xsd"
 	schemaLocation="http://www.isr.uci.edu/projects/xarchuci/ext/options.xsd"/>
+-->
 	
+<xsd:schema xmlns="http://www.ics.uci.edu/~jgeorgas/schemas/statechart.xsd" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns:archinstance="http://www.ics.uci.edu/pub/arch/xArch/instance.xsd"
+	xmlns:archimpl="http://www.ics.uci.edu/pub/arch/xArch/implementation.xsd"
+	xmlns:interfacedef="http://www.ics.uci.edu/~jgeorgas/schemas/interfacedef.xsd"
+	xmlns:options="http://www.ics.uci.edu/pub/arch/xArch/options.xsd"
+	targetNamespace="http://www.ics.uci.edu/~jgeorgas/schemas/statechart.xsd" 
+	elementFormDefault="qualified" attributeFormDefault="qualified">            
+	
+	<!-- Import namespaces -->
+	<xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/instance.xsd" 
+	schemaLocation="http://www.isr.uci.edu/projects/xarchuci/core/instance.xsd"/>
+	<xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/implementation.xsd" 
+	schemaLocation="http://www.isr.uci.edu/projects/xarchuci/ext/implementation.xsd"/>
+	<xsd:import namespace="http://www.ics.uci.edu/~jgeorgas/schemas/interfacedef.xsd" 
+	schemaLocation="http://www.ics.uci.edu/~jgeorgas/schemas/interfacedef.xsd"/>
+	<xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/options.xsd"
+	schemaLocation="http://www.isr.uci.edu/projects/xarchuci/ext/options.xsd"/>
+
+http://www.cefns.nau.edu/Research/D4P/EGR486/CS/12-Projects/BBA/
+
 	<!-- Documentation -->
 	<xsd:annotation>
 		<xsd:documentation>
