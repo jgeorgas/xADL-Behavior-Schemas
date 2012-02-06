@@ -8,7 +8,8 @@
 	targetNamespace="http://www.ics.uci.edu/~jgeorgas/schemas/statechart.xsd" 
 	elementFormDefault="qualified" attributeFormDefault="qualified">            
 	
-	<!-- Import namespaces -->
+-->
+<!--	<!-- Import namespaces -->
 	<xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/instance.xsd" 
 	schemaLocation="http://www.isr.uci.edu/projects/xarchuci/core/instance.xsd"/>
 	<xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/implementation.xsd" 
@@ -29,16 +30,15 @@
 	elementFormDefault="qualified" attributeFormDefault="qualified">            
 	
 	<!-- Import namespaces -->
-	<xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/instance.xsd" 
-	schemaLocation="http://www.isr.uci.edu/projects/xarchuci/core/instance.xsd"/>
-	<xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/implementation.xsd" 
-	schemaLocation="http://www.isr.uci.edu/projects/xarchuci/ext/implementation.xsd"/>
-	<xsd:import namespace="http://www.ics.uci.edu/~jgeorgas/schemas/interfacedef.xsd" 
-	schemaLocation="http://www.ics.uci.edu/~jgeorgas/schemas/interfacedef.xsd"/>
-	<xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/options.xsd"
-	schemaLocation="http://www.isr.uci.edu/projects/xarchuci/ext/options.xsd"/>
+	<xsd:import namespace="http://www.cefns.nau.edu/Research/D4P/EGR486/CS/12-Projects/BBA/statechart.xsd" 
+	schemaLocation="http://www.cefns.nau.edu/Research/D4P/EGR486/CS/12-Projects/BBA/statechart.xsd"/>
+	<xsd:import namespace="http://www.cefns.nau.edu/Research/D4P/EGR486/CS/12-Projects/BBA/statechart.xsd" 
+	schemaLocation="http://www.cefns.nau.edu/Research/D4P/EGR486/CS/12-Projects/BBA/statechart.xsd"/>
+	<xsd:import namespace="http://www.cefns.nau.edu/Research/D4P/EGR486/CS/12-Projects/BBA/statechart.xsd" 
+	schemaLocation="http://www.cefns.nau.edu/Research/D4P/EGR486/CS/12-Projects/BBA/statechart.xsd"/>
+	<xsd:import namespace="http://www.cefns.nau.edu/Research/D4P/EGR486/CS/12-Projects/BBA/statechart.xsd"
+	schemaLocation="http://www.cefns.nau.edu/Research/D4P/EGR486/CS/12-Projects/BBA/statechart.xsd"/>
 
-http://www.cefns.nau.edu/Research/D4P/EGR486/CS/12-Projects/BBA/
 
 	<!-- Documentation -->
 	<xsd:annotation>
