@@ -22,7 +22,8 @@
 	
 	<!-- Import namespaces -->
 	<xsd:import namespace="http://www.cefns.nau.edu/Research/D4P/EGR486/CS/12-Projects/BBA/interfacedef.xsd" schemaLocation="http://www.cefns.nau.edu/Research/D4P/EGR486/CS/12-Projects/BBA/interfacedef.xsd"/>
-	<xsd:import namespace="http://www.cefns.nau.edu/Research/D4P/EGR486/CS/12-Projects/BBA/interfacedef.xsd" schemaLocation="http://www.cefns.nau.edu/Research/D4P/EGR486/CS/12-Projects/BBA/interfacedef.xsd"/>
+	<xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/instance.xsd" schemaLocation="http://www.ics.uci.edu/pub/arch/xArch/instance.xsd"/>
+         <xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/implementation.xsd" schemaLocation="http://www.ics.uci.edu/pub/arch/xArch/implementation.xsd"/>
 	
 	<!-- Documentation -->
 	<xsd:annotation>
@@ -52,6 +53,8 @@
       			Schema resurrection. Makino additions.
       		4/3/2006: John Georgas [jgeorgas@ics.uci.edu]:
       			Initial schema development and validation.
+                  2/7/2012: Kyoko Makino [kcm58@nau.edu]:
+                           Imported new namespaces for statechart tool support.
     	</xsd:documentation>
     </xsd:annotation>
 
