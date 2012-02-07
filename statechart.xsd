@@ -20,13 +20,13 @@
 	schemaLocation="http://www.isr.uci.edu/projects/xarchuci/ext/options.xsd"/>
 -->
 	
-<xsd:schema xmlns="http://www.ics.uci.edu/~jgeorgas/schemas/statechart.xsd" 
+<xsd:schema xmlns="http://www.cefns.nau.edu/Research/D4P/EGR486/CS/12-Projects/BBA/statechart.xsd" 
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
 	xmlns:archinstance="http://www.ics.uci.edu/pub/arch/xArch/instance.xsd"
 	xmlns:archimpl="http://www.ics.uci.edu/pub/arch/xArch/implementation.xsd"
 	xmlns:interfacedef="http://www.ics.uci.edu/~jgeorgas/schemas/interfacedef.xsd"
 	xmlns:options="http://www.ics.uci.edu/pub/arch/xArch/options.xsd"
-	targetNamespace="http://www.ics.uci.edu/~jgeorgas/schemas/statechart.xsd" 
+	targetNamespace="http://www.cefns.nau.edu/Research/D4P/EGR486/CS/12-Projects/BBA/statechart.xsd" 
 	elementFormDefault="qualified" attributeFormDefault="qualified">            
 	
 	<!-- Import namespaces -->
