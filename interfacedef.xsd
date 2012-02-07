@@ -278,7 +278,7 @@
 
 	<xsd:complexType name="EventType" abstract="true"/>
 	    <xsd:complexContent>
-	        <xsd:estension base="Event">
+	        <xsd:extension base="Event">
 	            <xsd:sequence>
 	                <xsd:element name="eventString" type="string"
 	                    minOccurs="1" maxOccurs="1"/>
@@ -291,7 +291,7 @@
 
 	<xsd:complexType name="EventType" abstract="true"/>
 	    <xsd:complexContent>
-	        <xsd:estension base="Event">
+	        <xsd:extension base="Event">
 	            <xsd:sequence>
 	                <xsd:element name="eventInt" type="integer"
 	                    minOccurs="1" maxOccurs="1"/>
@@ -304,7 +304,7 @@
 
 	<xsd:complexType name="EventType" abstract="true"/>
 	    <xsd:complexContent>
-	        <xsd:estension base="Event">
+	        <xsd:extension base="Event">
 	            <xsd:sequence>
 	                <xsd:element name="eventDouble" type="double"
 	                    minOccurs="1" maxOccurs="1"/>
@@ -317,13 +317,13 @@
 
 	<xsd:complexType name="EventType" abstract="true"/>
 	    <xsd:complexContent>
-	        <xsd:estension base="Event">
+	        <xsd:extension base="Event">
 	            <xsd:sequence>
 	                <xsd:element name="eventObject" type="object"
 	                    minOccurs="1" maxOccurs="1"/>
 	            </xsd:sequence>
 	            <xsd:attribute name="id" type="archinstance:Identifier"/>
-	        </xsd:estension>
+	        </xsd:extension>
 	    </xsd:complexContent>
 	</xsd:complexType>
 
@@ -335,7 +335,7 @@
 
 	<xsd:complexType name="SimpleEventObject" abstract="true"/>
 	    <xsd:complexContent>
-	        <xsd:estension base="Object">
+	        <xsd:extension base="Object">
 	            <xsd:sequence>
 	                <xsd:element name="SimpleEventObject" type="object"
 	                    minOccurs="1" maxOccurs="1"/>
@@ -352,7 +352,7 @@
 
 	<xsd:complexType name="SimpleEventInstance" abstract="true"/>
 	    <xsd:complexContent>
-	        <xsd:estension base="Instance">
+	        <xsd:extension base="Instance">
 	            <xsd:sequence>
 	                <xsd:element name="SimpleEventInstance" type="instance"
 	                    minOccurs="1" maxOccurs="1"/>
