@@ -60,8 +60,8 @@
       		   creating new types of components that have statechart links.
   
       	Change Log:
-                   2/7/2012: Kyoko Makino[kcm58@nau.edu]: 
-                           Imported new namespace for statechart support.
+                   2/7/2012: Kyoko Makino [kcm58@nau.edu]:
+                           Imported new namespaces for statechart tool support.
       		11/4/2011: John Georgas [john.georgas@nau.edu]:
       			Resurrected schema; integrated Makino XSD.
       	    5/10/2007: John Georgas [jgeorgas@ics.uci.edu]:
